@@ -1,0 +1,83 @@
+/* Header Base Styles */
+.header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  transition: all 0.5s;
+  z-index: 1;
+}
+
+.header_container {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header_left ul,
+.header_right ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.header_left ul li {
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.header_right ul li {
+  margin-left: 15px;
+  cursor: pointer;
+}
+/* Remove outline and box-shadow from toggler button when focused or clicked */
+.navbar-toggler{
+  outline: none !important;
+  border: none !important;  /* Remove border */
+  background-color: transparent !important; /* Remove background color */
+  box-shadow: none !important;  /* Remove box-shadow */
+}
+
+
+/* Logo Styling */
+.navbar-brand img {
+  max-width: 100px;
+  height: auto;
+  transition: all 0.3s ease;
+}
+
+/* Default: Show desktop logo, hide mobile logo */
+.logo-desktop {
+  display: block;
+}
+
+.logo-mobile {
+  display: none;
+}
+
+
+
+
+/* Media Query: Mobile Screens */
+@media (max-width: 768px) {
+  .header {
+    height: 8vh; /* Reduce header height for mobile */
+  }
+
+  /* Show mobile logo, hide desktop logo */
+  .logo-desktop {
+    display: none;
+  }
+
+  .logo-mobile {
+    display: block;
+    max-height: 10vh;
+    max-width: 50px; /* Adjust size for mobile */
+  }
+
+}
