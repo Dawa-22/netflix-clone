@@ -5,12 +5,11 @@ import { Link } from "react-router-dom";
 const TitleCards = ({ title, category }) => {
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); // Error state for handling failures
+  const [error, setError] = useState(null);
   const cardsRef = useRef();
 
-  const API_KEY = "e79e4e29033aa8a0238fd040689944fd"; // Your API key
+  const API_KEY = "e79e4e29033aa8a0238fd040689944fd";
 
-  
   const handleWheel = (event) => {
     event.preventDefault();
     const scrollSpeed = 100;
@@ -19,11 +18,10 @@ const TitleCards = ({ title, category }) => {
   };
 
   useEffect(() => {
-    console.log("Fetching data for category:", category); // Log category to verify it's being passed
+    console.log("Fetching data for category:", category);
     setLoading(true);
     setError(null);
 
-   
     fetch(
       `https://api.themoviedb.org/3/movie/${category || "now_playing"}?api_key=${API_KEY}&language=en-US&page=1`
     )
@@ -35,7 +33,14 @@ const TitleCards = ({ title, category }) => {
       })
       .then((res) => {
         console.log("API Response:", res);
-        setApiData(res.results);
+
+
+        const sortedMovies = res.results.sort((a, b) => {
+          const dateA = new Date(a.release_date);
+          const dateB = new Date(b.release_date);
+          return dateB - dateA;
+        });
+        setApiData(sortedMovies);
         setLoading(false);
       })
       .catch((err) => {
@@ -47,7 +52,6 @@ const TitleCards = ({ title, category }) => {
     const currentRef = cardsRef.current;
     currentRef.addEventListener("wheel", handleWheel);
 
-    
     return () => {
       currentRef.removeEventListener("wheel", handleWheel);
     };
